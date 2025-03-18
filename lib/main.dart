@@ -13,8 +13,12 @@ class MyApp extends StatelessWidget {
       home: AppLayout(content: HomeView()), // Página inicial
       routes: {
         '/home': (context) => AppLayout(content: HomeView()),
-        '/contact': (context) => AppLayout(content: ContactView()),
+        '/store': (context) => AppLayout(content: StoreView()),
         '/about': (context) => AppLayout(content: AboutView()),
+        '/activities': (context) => AppLayout(content: ActivitiesView()),
+        '/products': (context) => AppLayout(content: ProductsView()),
+        '/branches': (context) => AppLayout(content: BranchesView()),
+        '/contact': (context) => AppLayout(content: ContactView()),
       },
     );
   }

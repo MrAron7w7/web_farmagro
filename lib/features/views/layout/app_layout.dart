@@ -15,18 +15,28 @@ class _AppLayoutState extends State<AppLayout> {
     setState(() {
       _selectedIndex = index;
     });
-    // Aquí puedes agregar la lógica para navegar entre páginas
-
     // Navegar a la página correspondiente
     switch (index) {
       case 0:
         Navigator.pushNamed(context, '/home');
         break;
       case 1:
-        Navigator.pushNamed(context, '/contact');
+        Navigator.pushNamed(context, '/store');
         break;
       case 2:
         Navigator.pushNamed(context, '/about');
+        break;
+      case 3:
+        Navigator.pushNamed(context, '/activities');
+        break;
+      case 4:
+        Navigator.pushNamed(context, '/products');
+        break;
+      case 5:
+        Navigator.pushNamed(context, '/branches');
+        break;
+      case 6:
+        Navigator.pushNamed(context, '/contact');
         break;
     }
   }
@@ -37,6 +47,8 @@ class _AppLayoutState extends State<AppLayout> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
+          // Imagen en la parte superior
+          Center(child: Image.asset('assets/logo.png', height: 100)),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -45,7 +57,7 @@ class _AppLayoutState extends State<AppLayout> {
                 Row(
                   children: [
                     Text(
-                      "CatalogoWeb",
+                      "Farmagro",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -54,9 +66,17 @@ class _AppLayoutState extends State<AppLayout> {
                     SizedBox(width: 45),
                     _buildNavItem("Inicio", 0),
                     SizedBox(width: 20),
-                    _buildNavItem("Catálogo", 1),
+                    _buildNavItem("Tienda en Línea", 1),
                     SizedBox(width: 20),
-                    _buildNavItem("Contactos", 2),
+                    _buildNavItem("Nosotros", 2),
+                    SizedBox(width: 20),
+                    _buildNavItem("Actividades", 3),
+                    SizedBox(width: 20),
+                    _buildNavItem("Catálogo de productos", 4),
+                    SizedBox(width: 20),
+                    _buildNavItem("Sucursales", 5),
+                    SizedBox(width: 20),
+                    _buildNavItem("Contáctenos", 6),
                     Spacer(),
                     SizedBox(
                       width: 250,
@@ -100,7 +120,7 @@ class _AppLayoutState extends State<AppLayout> {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
-            color: _selectedIndex == index ? Colors.black : Colors.grey,
+            color: _selectedIndex == index ? Colors.green : Colors.grey,
           ),
         ),
       ),
