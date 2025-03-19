@@ -80,7 +80,7 @@ class _AppLayoutState extends State<AppLayout> {
                 Image.asset(
                   'assets/logo.png',
                   height: 70,
-                  width: 150,
+                  width: 200,
                   fit: BoxFit.fill,
                 ),
                 Row(
