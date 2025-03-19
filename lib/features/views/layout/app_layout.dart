@@ -62,50 +62,231 @@ class _AppLayoutState extends State<AppLayout> {
       drawer: isDesktop ? null : _buildMobileDrawer(),
       body: Column(
         children: [
-          // Imagen en la parte superior
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            color: const Color(0xfff5f5f5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  '1800 - Farmagro',
-                  style: TextStyle(color: Color(0xffbebebe)),
-                ),
-                Image.asset(
-                  'assets/logo.png',
-                  height: 70,
-                  width: 150,
-                  fit: BoxFit.fill,
-                ),
-                Row(
-                  children: [
-                    _buildSocialNetwork(
-                      index: 0,
-                      icon: LucideIcons.facebook,
-                      onTap: () => print('Facebook'),
-                    ),
-                    _buildSocialNetwork(
-                      index: 1,
-                      icon: LucideIcons.instagram,
-                      onTap: () => print('Instagram'),
-                    ),
-                    _buildSocialNetwork(
-                      index: 2,
-                      icon: LucideIcons.twitter,
-                      onTap: () => print('Twitter'),
-                    ),
-                    _buildSocialNetwork(
-                      index: 3,
-                      icon: LucideIcons.phone,
-                      onTap: () => print('Phone'),
-                    ),
-                  ],
-                ),
-              ],
+          // Header con logo y redes sociales
+          _buildHeader(isDesktop, isMobile),
+
+          // Barra de navegación principal
+          if (isDesktop) _buildDesktopNavBar() else _buildMobileAppBar(),
+
+          // Contenido principal
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              child: widget.content ?? Container(),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  // Header con logo y redes sociales
+  Widget _buildHeader(bool isDesktop, bool isMobile) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: isDesktop ? 40 : 16,
+        vertical: isDesktop ? 10 : 8,
+      ),
+      decoration: BoxDecoration(
+        color: const Color(0xfff5f5f5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Logo central en móvil, a la izquierda en tablet/desktop
+          Container(
+            padding: EdgeInsets.symmetric(vertical: isMobile ? 4 : 0),
+            child: Image.asset(
+              'assets/logo.png',
+              height: isMobile ? 50 : 70,
+              fit: BoxFit.contain,
+            ),
+          ),
+
+          // Redes sociales
+          Row(
+            children: [
+              _buildSocialNetwork(
+                index: 0,
+                icon: LucideIcons.facebook,
+                onTap: () => print('Facebook'),
+                showText: isDesktop,
+                text: "Facebook",
+              ),
+              _buildSocialNetwork(
+                index: 1,
+                icon: LucideIcons.instagram,
+                onTap: () => print('Instagram'),
+                showText: isDesktop,
+                text: "Instagram",
+              ),
+              if (!isMobile)
+                _buildSocialNetwork(
+                  index: 2,
+                  icon: LucideIcons.twitter,
+                  onTap: () => print('Twitter'),
+                  showText: isDesktop,
+                  text: "Twitter",
+                ),
+              _buildSocialNetwork(
+                index: 3,
+                icon: LucideIcons.phone,
+                onTap: () => print('Phone'),
+                showText: isDesktop,
+                text: "Llámanos",
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Barra de navegación para escritorio
+  Widget _buildDesktopNavBar() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildNavItem("Inicio", 0, true),
+          _buildNavItem("Nosotros", 1, true),
+          _buildNavItem("Catálogo de productos", 2, true),
+          _buildNavItem("Contáctenos", 3, true),
+        ],
+      ),
+    );
+  }
+
+  // AppBar para móvil
+  Widget _buildMobileAppBar() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 3,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: Icon(LucideIcons.menu, color: const Color(0xff45864e)),
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
+          ),
+          Text(
+            _getPageTitle(),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xff45864e),
+            ),
+          ),
+          IconButton(
+            icon: Icon(LucideIcons.search, color: const Color(0xff45864e)),
+            onPressed: () {
+              // Acción de búsqueda
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Drawer para navegación móvil
+  Widget _buildMobileDrawer() {
+    return Drawer(
+      child: Column(
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0xff45864e),
+                  const Color(0xff45864e).withOpacity(0.8),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Image.asset(
+                      'assets/logo.png',
+                      height: 60,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Farmagro',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          _buildNavItem("Inicio", 0, false),
+          _buildNavItem("Nosotros", 1, false),
+          _buildNavItem("Catálogo de productos", 2, false),
+          _buildNavItem("Contáctenos", 3, false),
+          const Divider(),
+          ListTile(
+            leading: Icon(LucideIcons.phone, color: const Color(0xff45864e)),
+            title: const Text('Llámanos'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: Icon(LucideIcons.mail, color: const Color(0xff45864e)),
+            title: const Text('Envíanos un correo'),
+            onTap: () {},
+          ),
+          Expanded(child: Container()),
+          // Footer del drawer
           Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Row(
