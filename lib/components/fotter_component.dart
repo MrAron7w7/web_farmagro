@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:web_farmagro/core/constants.dart';
 
 class FotterComponent extends StatefulWidget {
   final bool isDesktop;
@@ -57,14 +58,14 @@ class _FotterComponentState extends State<FotterComponent> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Image.asset(
-                      'assets/logo.png',
+                      AppImgs.logo,
                       height: 60,
                       fit: BoxFit.contain,
                     ),
                   ),
                   const SizedBox(height: 16),
                   const Text(
-                    'Farmagro está comprometido con la agricultura sostenible, ofreciendo soluciones innovadoras para mejorar la productividad y calidad de los cultivos.',
+                    'Agrimarket está comprometido con la agricultura sostenible, ofreciendo soluciones innovadoras para mejorar la productividad y calidad de los cultivos.',
                     style: TextStyle(color: Colors.white, height: 1.5),
                   ),
                 ],
@@ -115,8 +116,11 @@ class _FotterComponentState extends State<FotterComponent> {
                     LucideIcons.mapPin,
                     'Av. Principal 123, Ciudad',
                   ),
-                  _buildContactInfo(LucideIcons.phone, '1800 - Farmagro'),
-                  _buildContactInfo(LucideIcons.mail, 'info@farmagro.com'),
+                  _buildContactInfo(
+                    LucideIcons.phone,
+                    '977 693 392 - 946 546 485',
+                  ),
+                  _buildContactInfo(LucideIcons.mail, 'agro_plaza@yahoo.com'),
                   _buildContactInfo(LucideIcons.clock, 'Lun-Vie: 8:00 - 17:00'),
                 ],
               ),
@@ -130,7 +134,7 @@ class _FotterComponentState extends State<FotterComponent> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              '© 2025 Farmagro. Todos los derechos reservados.',
+              '© 2025 Agrimarket. Todos los derechos reservados.',
               style: TextStyle(color: Colors.white70),
             ),
             Row(
@@ -167,19 +171,15 @@ class _FotterComponentState extends State<FotterComponent> {
               ),
             ],
           ),
-          child: Image.asset(
-            'assets/logo.png',
-            height: 50,
-            fit: BoxFit.contain,
-          ),
+          child: Image.asset(AppImgs.logo, height: 50, fit: BoxFit.contain),
         ),
 
         // Información de contacto
         Column(
           children: [
             _buildContactInfo(LucideIcons.mapPin, 'Av. Principal 123, Ciudad'),
-            _buildContactInfo(LucideIcons.phone, '1800 - Farmagro'),
-            _buildContactInfo(LucideIcons.mail, 'info@farmagro.com'),
+            _buildContactInfo(LucideIcons.phone, '977 693 392 - 946 546 485'),
+            _buildContactInfo(LucideIcons.mail, 'agro_plaza@yahoo.com '),
           ],
         ),
 
@@ -201,7 +201,7 @@ class _FotterComponentState extends State<FotterComponent> {
         const SizedBox(height: 16),
 
         const Text(
-          '© 2025 Farmagro. Todos los derechos reservados.',
+          '© 2025 Agrimarket. Todos los derechos reservados.',
           style: TextStyle(color: Colors.white70, fontSize: 12),
           textAlign: TextAlign.center,
         ),
@@ -244,7 +244,7 @@ class _FotterComponentState extends State<FotterComponent> {
         children: [
           Icon(icon, size: 16, color: Colors.white70),
           const SizedBox(width: 10),
-          Text(text, style: const TextStyle(color: Colors.white70)),
+          SelectableText(text, style: const TextStyle(color: Colors.white70)),
         ],
       ),
     );

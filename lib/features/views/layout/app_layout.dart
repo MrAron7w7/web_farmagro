@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:web_farmagro/core/constants.dart';
+import 'package:web_farmagro/core/router.dart';
 
 class AppLayout extends StatefulWidget {
   final Widget? content;
@@ -10,39 +13,41 @@ class AppLayout extends StatefulWidget {
 }
 
 class _AppLayoutState extends State<AppLayout> {
-  int _selectedIndex = 0;
+  //int _selectedIndex = 0;
   final Set<int> _hoveredIcons = {};
   //bool _isMenuOpen = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Obtener el índice seleccionado desde los parámetros de la ruta
-    final routeArgs = ModalRoute.of(context)?.settings.arguments;
-    if (routeArgs is int) {
-      _selectedIndex = routeArgs;
-    }
+  // Obtener el índice seleccionado basado en la ruta actual
+  int get _selectedIndex {
+    final location = GoRouterState.of(context).uri.path;
+    if (location.startsWith(AppRoute.about.path)) return 1;
+    if (location.startsWith(AppRoute.products.path)) return 2;
+    if (location.startsWith(AppRoute.contact.path)) return 3;
+    if (location.startsWith(AppRoute.activities.path)) return 4;
+    if (location.startsWith(AppRoute.branches.path)) return 5;
+    return 0; // Home por defecto
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      //_isMenuOpen = false; // Cerrar el menú después de seleccionar en mobile
-    });
-    // Navegar a la página correspondiente y pasar el índice seleccionado
+    // Cerrar drawer si está abierto (en móvil)
+    if (_scaffoldKey.currentState?.isDrawerOpen ?? false) {
+      _scaffoldKey.currentState?.openEndDrawer();
+    }
+
+    // Navegar usando go_router
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(context, '/home', arguments: index);
+        context.go('/home');
         break;
       case 1:
-        Navigator.pushReplacementNamed(context, '/about', arguments: index);
+        context.go('/about');
         break;
       case 2:
-        Navigator.pushReplacementNamed(context, '/products', arguments: index);
+        context.go('/products');
         break;
       case 3:
-        Navigator.pushReplacementNamed(context, '/contact', arguments: index);
+        context.go('/contact');
         break;
     }
   }
@@ -57,18 +62,11 @@ class _AppLayoutState extends State<AppLayout> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-
-      // Drawer para móvil
       drawer: isDesktop ? null : _buildMobileDrawer(),
       body: Column(
         children: [
-          // Header con logo y redes sociales
           _buildHeader(isDesktop, isMobile),
-
-          // Barra de navegación principal
           if (isDesktop) _buildDesktopNavBar() else _buildMobileAppBar(),
-
-          // Contenido principal
           Expanded(
             child: SizedBox(
               width: double.infinity,
@@ -104,7 +102,7 @@ class _AppLayoutState extends State<AppLayout> {
           Container(
             padding: EdgeInsets.symmetric(vertical: isMobile ? 4 : 0),
             child: Image.asset(
-              'assets/logo.png',
+              AppImgs.logo,
               height: isMobile ? 50 : 70,
               fit: BoxFit.contain,
             ),
@@ -206,12 +204,6 @@ class _AppLayoutState extends State<AppLayout> {
               color: const Color(0xff45864e),
             ),
           ),
-          IconButton(
-            icon: Icon(LucideIcons.search, color: const Color(0xff45864e)),
-            onPressed: () {
-              // Acción de búsqueda
-            },
-          ),
         ],
       ),
     );
@@ -252,14 +244,14 @@ class _AppLayoutState extends State<AppLayout> {
                     ),
                     padding: const EdgeInsets.all(8),
                     child: Image.asset(
-                      'assets/logo.png',
+                      AppImgs.logo,
                       height: 60,
                       fit: BoxFit.contain,
                     ),
                   ),
                   const SizedBox(height: 12),
                   const Text(
-                    'Farmagro',
+                    'Agrimarket',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -301,7 +293,7 @@ class _AppLayoutState extends State<AppLayout> {
           const Padding(
             padding: EdgeInsets.only(bottom: 16),
             child: Text(
-              '© 2025 Farmagro',
+              '© 2025 Agrimarket',
               style: TextStyle(color: Colors.grey),
             ),
           ),

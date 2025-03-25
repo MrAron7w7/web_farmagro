@@ -445,7 +445,7 @@ class _ContactViewState extends State<ContactView> {
           _buildContactItem(
             icon: LucideIcons.phone,
             title: 'Teléfono',
-            content: '1800-farmagro',
+            content: '977 693 392 - 946 546 485',
           ),
 
           SizedBox(height: 20),
@@ -454,7 +454,7 @@ class _ContactViewState extends State<ContactView> {
           _buildContactItem(
             icon: LucideIcons.mail,
             title: 'Email',
-            content: 'info@farmagro.com',
+            content: 'agro_plaza@yahoo.com ',
           ),
 
           SizedBox(height: 30),

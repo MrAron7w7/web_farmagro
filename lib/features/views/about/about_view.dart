@@ -37,6 +37,72 @@ class AboutView extends StatelessWidget {
                 ),
               ],
             ),
+
+            const SizedBox(height: 40),
+
+            // COMPANY DESCRIPTION
+            _buildSection(
+              context,
+              isDesktop,
+              'assets/agrimarket_team.png', // Update image
+              'QUIÉNES SOMOS',
+              'AGRIMARKET es una empresa peruana dedicada a la comercialización de insumos agrícolas, incluyendo agroquímicos, fertilizantes y semillas. Nos especializamos en proporcionar soluciones integrales para el desarrollo de cultivos, respaldados por un equipo de ingenieros y técnicos altamente especializados con amplia experiencia en el sector agrícola.',
+            ),
+
+            const SizedBox(height: 40),
+
+            // MARCAS ASOCIADAS
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1000),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'MARCAS LÍDERES',
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Trabajamos en estrecha colaboración con las principales marcas del mercado agrícola, garantizando la máxima calidad y eficiencia en cada producto:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black87,
+                          height: 1.5,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children: [
+                          _buildBrandChip('Bayer'),
+                          _buildBrandChip('Farmex'),
+                          _buildBrandChip('TQC'),
+                          _buildBrandChip('Syngenta'),
+                          _buildBrandChip('Serfi'),
+                          _buildBrandChip('Adama'),
+                          _buildBrandChip('Silvestre'),
+                          _buildBrandChip('PSW'),
+                          _buildBrandChip('Farmagro'),
+                          _buildBrandChip('SQM Vitas'),
+                          _buildBrandChip('Molinos'),
+                          _buildBrandChip('Gavilón'),
+                          _buildBrandChip('Neoagrum'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
             const SizedBox(height: 40),
 
             // MISION
@@ -45,7 +111,7 @@ class AboutView extends StatelessWidget {
               isDesktop,
               'assets/granjero.png',
               'MISIÓN',
-              'Somos una empresa orientada a proveer insumos y servicios de alta calidad al mercado agropecuario del Ecuador. Nuestro compromiso es impulsar la productividad y sostenibilidad en el sector agrícola, brindando soluciones innovadoras y asesoramiento técnico especializado.\n\nNuestra visión es ser reconocidos como líderes en el mercado agropecuario, innovando con servicios y soluciones, y promoviendo la incursión de nuevos negocios complementarios. Buscamos ser un referente en sostenibilidad y responsabilidad social, contribuyendo al desarrollo del campo ecuatoriano.',
+              'Satisfacer las necesidades de nuestros clientes agricultores con productos innovadores y servicios de calidad, generando valor para la agricultura y con una asesoría en manos de un equipo dedicado y profesional.',
             ),
             const SizedBox(height: 40),
 
@@ -54,8 +120,8 @@ class AboutView extends StatelessWidget {
               context,
               isDesktop,
               'assets/valores.png',
-              'PRINCIPIOS Y VALORES',
-              'Nos basamos en principios éticos, morales y responsabilidad ante la sociedad y el medio ambiente, mediante la aplicación y mejoramiento continuo. Nuestros valores son el pilar fundamental de nuestra cultura organizacional.',
+              'VISIÓN',
+              'Ser la empresa líder de distribución de Insumos agrícolas con productos de calidad para una agricultura sostenible y rentable, generando una marca de calidad y garantía.',
             ),
             const SizedBox(height: 20),
 
@@ -257,12 +323,115 @@ class AboutView extends StatelessWidget {
             ),
 
             const SizedBox(height: 40),
+            _buildBranchesSection(context, isDesktop),
+
+            const SizedBox(height: 40),
 
             // FOTTER DE ARON ;D
             FotterComponent(isDesktop: isDesktop),
           ],
         ),
       ),
+    );
+  }
+
+  // Add this method to your existing AboutView class
+  Widget _buildBranchesSection(BuildContext context, bool isDesktop) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'NUESTRAS SUCURSALES',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Grouped branches by location
+              _buildBranchGroup('Sucursales en Cañete', [
+                'Jr. Jose Galvez 113 - San Vicente de Cañete (Sucursal Principal)',
+                'Jr. San Agustín N° 280 - San Vicente de Cañete',
+                'Jr. San Agustín N° 330 - San Vicente de Cañete',
+                'Parque de Herbay Alto - Calle Principal S/N',
+              ]),
+              const SizedBox(height: 20),
+              _buildBranchGroup('Sucursales en Chincha', [
+                'Calle Mariscal Castilla N° 431 - Chincha Alta',
+                'Calle Mariscal Castilla N° 465 - Chincha Alta',
+              ]),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Helper method to create a branch group
+  Widget _buildBranchGroup(String groupTitle, List<String> branches) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            groupTitle,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
+          ),
+          const SizedBox(height: 10),
+          ...branches.map(
+            (branch) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Row(
+                children: [
+                  const Icon(Icons.location_on, color: Colors.green, size: 20),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      branch,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Method for creating brand chips
+  Widget _buildBrandChip(String brandName) {
+    return Chip(
+      label: Text(brandName),
+      backgroundColor: Colors.green.shade50,
+      labelStyle: TextStyle(color: Colors.green.shade800),
     );
   }
 

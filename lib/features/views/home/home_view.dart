@@ -58,7 +58,7 @@ class HomeView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Bienvenido a Farmagro',
+                'Bienvenido a Agrimarket',
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            'En Farmagro, nos especializamos en brindar soluciones eficientes para el sector agrícola, ofreciendo productos de alta calidad y asesoramiento técnico.',
+            'En Agrimarket, nos especializamos en brindar soluciones eficientes para el sector agrícola, ofreciendo productos de alta calidad y asesoramiento técnico.',
             style: TextStyle(fontSize: 16, color: Colors.black87),
             textAlign: TextAlign.center,
           ),

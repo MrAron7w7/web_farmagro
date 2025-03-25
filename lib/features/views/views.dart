@@ -4,5 +4,6 @@ export 'branches/branches_view.dart';
 export 'contact/contact_view.dart';
 export 'home/home_view.dart';
 export 'layout/app_layout.dart';
+export 'notfound/not_found_view.dart';
 export 'products/products_view.dart';
 export 'store/store_view.dart';
