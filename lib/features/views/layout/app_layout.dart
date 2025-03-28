@@ -4,6 +4,9 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:web_farmagro/core/constants.dart';
 import 'package:web_farmagro/core/router.dart';
 
+import '../../../data/networks.dart';
+import '../../../utils/url_helper.dart';
+
 class AppLayout extends StatefulWidget {
   final Widget? content;
   const AppLayout({super.key, required this.content});
@@ -114,14 +117,14 @@ class _AppLayoutState extends State<AppLayout> {
               _buildSocialNetwork(
                 index: 0,
                 icon: LucideIcons.facebook,
-                onTap: () => print('Facebook'),
+                onTap: () {UrlHelper.abrirEnlace(SocialLinks.facebook);},
                 showText: isDesktop,
                 text: "Facebook",
               ),
               _buildSocialNetwork(
                 index: 1,
                 icon: LucideIcons.instagram,
-                onTap: () => print('Instagram'),
+                onTap: () {UrlHelper.abrirEnlace(SocialLinks.instagram);},
                 showText: isDesktop,
                 text: "Instagram",
               ),
@@ -129,7 +132,7 @@ class _AppLayoutState extends State<AppLayout> {
                 _buildSocialNetwork(
                   index: 2,
                   icon: LucideIcons.twitter,
-                  onTap: () => print('Twitter'),
+                  onTap: () {UrlHelper.abrirEnlace(SocialLinks.twitter);},
                   showText: isDesktop,
                   text: "Twitter",
                 ),

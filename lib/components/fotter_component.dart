@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:web_farmagro/core/constants.dart';
+import 'package:web_farmagro/utils/url_helper.dart';
+
+import '../data/networks.dart';
 
 class FotterComponent extends StatefulWidget {
   final bool isDesktop;
@@ -139,10 +142,10 @@ class _FotterComponentState extends State<FotterComponent> {
             ),
             Row(
               children: [
-                _buildSocialIcon(LucideIcons.facebook, 10),
-                _buildSocialIcon(LucideIcons.instagram, 11),
-                _buildSocialIcon(LucideIcons.twitter, 12),
-                _buildSocialIcon(LucideIcons.youtube, 13),
+                _buildSocialIcon(LucideIcons.facebook, 10, onTap: (){UrlHelper.abrirEnlace(SocialLinks.facebook);}),
+                _buildSocialIcon(LucideIcons.instagram, 11, onTap: (){UrlHelper.abrirEnlace(SocialLinks.instagram);}),
+                _buildSocialIcon(LucideIcons.twitter, 12, onTap: (){UrlHelper.abrirEnlace(SocialLinks.twitter);}),
+                _buildSocialIcon(LucideIcons.youtube, 13, onTap: (){UrlHelper.abrirEnlace(SocialLinks.youtube);}),
               ],
             ),
           ],
@@ -189,10 +192,10 @@ class _FotterComponentState extends State<FotterComponent> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildSocialIcon(LucideIcons.facebook, 10),
-            _buildSocialIcon(LucideIcons.instagram, 11),
-            _buildSocialIcon(LucideIcons.twitter, 12),
-            _buildSocialIcon(LucideIcons.youtube, 13),
+            _buildSocialIcon(LucideIcons.facebook, 10, onTap: (){UrlHelper.abrirEnlace(SocialLinks.facebook);}),
+            _buildSocialIcon(LucideIcons.instagram, 11, onTap: (){UrlHelper.abrirEnlace(SocialLinks.instagram);}),
+            _buildSocialIcon(LucideIcons.twitter, 12, onTap: (){UrlHelper.abrirEnlace(SocialLinks.twitter);}),
+            _buildSocialIcon(LucideIcons.youtube, 13, onTap: (){UrlHelper.abrirEnlace(SocialLinks.youtube);}),
           ],
         ),
 
@@ -220,19 +223,22 @@ class _FotterComponentState extends State<FotterComponent> {
     );
   }
 
-  Widget _buildSocialIcon(IconData icon, int index) {
+  Widget _buildSocialIcon(IconData icon, int index, {required Function()? onTap}) {
     return MouseRegion(
       onEnter: (_) {},
       onExit: (_) {},
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.white, width: 1),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white, width: 1),
+          ),
+          child: Icon(icon, size: 20, color: const Color(0xff45864e)),
         ),
-        child: Icon(icon, size: 20, color: const Color(0xff45864e)),
       ),
     );
   }

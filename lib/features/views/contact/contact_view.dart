@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:web_farmagro/components/components.dart';
 import 'package:web_farmagro/core/constants.dart';
+import 'package:web_farmagro/data/networks.dart';
+
+import '../../../utils/url_helper.dart';
 
 class ContactView extends StatefulWidget {
   const ContactView({super.key});
@@ -436,7 +439,7 @@ class _ContactViewState extends State<ContactView> {
             icon: LucideIcons.mapPin,
             title: 'Dirección',
             content:
-                'Cdla. Los vergeles Calle 23A Dr. Carlos Julio Arosemena, No 1-6-7 Intersección Av. 38C Mz 263. Guayaquil - Ecuador',
+                'Jr. Jose galvez 113- San Vicente de Cañete (Oficina Principal)',
           ),
 
           SizedBox(height: 20),
@@ -472,31 +475,38 @@ class _ContactViewState extends State<ContactView> {
           SizedBox(height: 30),
 
           // Mapa (simulado)
-          Container(
-            height: 160,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.3),
-                width: 1,
+          GestureDetector(
+            onTap: () {
+              UrlHelper.abrirEnlace(
+                SocialLinks.mapsPrincipal,
+              );
+            },
+            child: Container(
+              height: 160,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.3),
+                  width: 1,
+                ),
               ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(LucideIcons.map, color: Colors.white, size: 40),
-                  SizedBox(height: 10),
-                  Text(
-                    'Ver en Google Maps',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(LucideIcons.map, color: Colors.white, size: 40),
+                    SizedBox(height: 10),
+                    Text(
+                      'Ver en Google Maps',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
