@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334135575156",
+    "project_id": "webagrimarket-d8510",
+    "storage_bucket": "webagrimarket-d8510.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334135575156:android:ba7e2ab1285176ba8c0721",
+        "android_client_info": {
+          "package_name": "com.example.web_farmagro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaGY_eG8vWGrMKUOR5iGRCaCdgi5s-m-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
